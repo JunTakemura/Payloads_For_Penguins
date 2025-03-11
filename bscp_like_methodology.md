@@ -5,6 +5,7 @@ For those who can't afford burp pro or cheapskates
 
 ### Recon
 
+List functions
 
 Fuzz
 
