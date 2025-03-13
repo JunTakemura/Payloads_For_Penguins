@@ -104,6 +104,8 @@ addEventListener()
 
 #### git
 
+Could be found with [fuzzing](#Fuzz)
+
 Download .git
 ```bash
 wget -r https://ID.web-security-academy.net/.git/
@@ -155,3 +157,9 @@ git show *commit-id*:*filename*
 #### SSTI
 
 #### Insecure deserialization
+
+
+## References
+[PortSwigger Academy Labs](https://portswigger.net/web-security/all-labs)  
+[PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master)  
+[Burp Suite Certified Practitioner Exam Study by botesjuan](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/README.md)  
