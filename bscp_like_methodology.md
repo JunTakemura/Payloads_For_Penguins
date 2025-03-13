@@ -58,7 +58,7 @@ ffuf -u https://ID.web-security-academy.net/FUZZ -w /path/to/SecLists/Web-Conten
 ```
 
 
-##### View source
+#### View source
 
 Look for indicators and hints.
 
