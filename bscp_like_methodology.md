@@ -52,7 +52,7 @@ For now I mainly focus on how to **identify** vulnerabilities rather than exploi
 
 #### Fuzz
 
-URL fuzz
+URL fuzz:
 ```bash
 ffuf -u https://ID.web-security-academy.net/FUZZ -w /path/to/SecLists/Web-Content/common.txt -s -c
 ```
@@ -106,19 +106,34 @@ addEventListener()
 
 Could be found with [fuzzing](#Fuzz)
 
-Download .git
+Download .git:
 ```bash
 wget -r https://ID.web-security-academy.net/.git/
 ```
 
-Find contents in past commits
+Find contents in past commits:
 ```bash
 git diff
-git log -- *filename*
-git show *commit-id*:*filename*
+git log -- FILENAME
+git show COMMIT_ID:FILENAME
 ```
 
 #### XSS
+
+
+
+##### Angular JS
+
+indicators:
+```html
+ng-app
+angular_VER.js
+```
+
+1.6+ payload:
+```js
+{{constructor.constructor('console.log(window.origin)')()}}
+```
 
 #### Cache poisoning
 
