@@ -1,56 +1,157 @@
 # Methodology for BSCP Style Web App Pentesting
-For those who can't afford burp pro or cheapskates
+For those who can't afford burp pro or cheapskates thogh you can't take an actual exam without pro. Note that this NOT a general pentesting methodology. For example in this workflow SQLi only appears in the stage 2 `get admin` but in reality it of course can be used for getting a normal user account.
 
 ## Flow
 
+For now I mainly focus on how to **identify** vulnerabilities rather than exploit them.
+
 ### Recon
 
-List functions
+#### List functionalities
 
-Fuzz
+1. login form, authentication
+  OAuth
+  Password reset
+  Host header
+  
+3. search, advanced search
+  XSS
+  SQLi
 
-View source
+5. blog posts
+  LFI
+  File upload
+  XSS
+  
+7. stock
+  XSS
+  SQLi
+  XXE
+  
+8. live chat
+   websocket
+
+9. category filter
+  SQLi
+  
+10. email update
+  CSRF
+
+11. API calls
+  IDOR
+  GraphQL
+
+13. feedback submission
+  OS command injections
+
+14. No visible functionalities
+    cookies
+    insecure deserialization
+    
+
+
+#### Fuzz
+
+URL fuzz
+```bash
+ffuf -u https://ID.web-security-academy.net/FUZZ -w /path/to/SecLists/Web-Content/common.txt -s -c
+```
+
+
+##### View source
+
+Look for indicators and hints.
+
+dev comments `<!--`  
+
+Indicators:
+```txt
+ng-app
+sanitizeKey()
+.js files
+<script> tags
+type=hidden
+&path=
+```
+
+DOM XSS sources and sinks:
+```txt
+---sources---
+window.location
+document.cookie
+document.domain
+WebSocket()
+postMessage()
+FileReader.readAsText()
+sessionStorage.setItem()
+location.search
+URLSearchParams
+---sinks---
+document.write()
+eval()
+element.src
+setRequestHeader()
+ExecuteSql()
+document.evaluate()
+JSON.parse
+replace()
+innerHTML
+addEventListener()
+```
+
 
 ### Access any user account
 
-git
+#### git
 
-XSS
+Download .git
+```bash
+wget -r https://ID.web-security-academy.net/.git/
+```
 
-Cache poisoning
+Find contents in past commits
+```bash
+git diff
+git log -- *filename*
+git show *commit-id*:*filename*
+```
 
-Http request smuggling
+#### XSS
 
-Bypass auth
+#### Cache poisoning
 
-Brute forcing
+#### Http request smuggling
+
+#### Bypass auth
+
+#### Brute forcing
 
 ### Get admin
 
-CSRF
+#### CSRF
 
-SQLi
+#### SQLi
 
-CORS
+#### CORS
 
-JWT
+#### JWT
 
-Business logic
+#### Business logic
 
-Broken access control
+#### Broken access control
 
 ### Read secret files
 
-OS command injections
+#### OS command injections
 
-XXE
+#### XXE
 
-LFI
+#### LFI
 
-File uploading
+#### File uploading
 
-SSRF
+#### SSRF
 
-SSTI
+#### SSTI
 
-Insecure deserialization
+#### Insecure deserialization
