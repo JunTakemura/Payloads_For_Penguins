@@ -45,8 +45,8 @@ For now I mainly focus on how to **identify** vulnerabilities rather than exploi
   OS command injections
 
 ##### No visible functionalities  
-    cookies
-    insecure deserialization
+  cookies
+  insecure deserialization
     
 
 
