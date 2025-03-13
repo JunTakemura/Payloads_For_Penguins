@@ -10,43 +10,43 @@ For now I mainly focus on how to **identify** vulnerabilities rather than exploi
 #### List functionalities
 
 ##### login form, authentication  
-  OAuth
-  Password reset
-  Host header
+    OAuth
+    Password reset
+    Host header
   
 ##### search, advanced search  
-  XSS
-  SQLi
+    XSS
+    SQLi
 
 ##### blog posts  
-  LFI
-  File upload
-  XSS
+    LFI
+    File upload
+    XSS
   
 ##### stock  
-  XSS
-  SQLi
-  XXE
+    XSS
+    SQLi
+    XXE
   
 ##### live chat  
-   websocket
+    websocket
 
 ##### category filter  
-  SQLi
+    SQLi
   
 ##### email update  
-  CSRF
+    CSRF
 
 ##### API calls  
-  IDOR
-  GraphQL
+    IDOR
+    GraphQL
 
 ##### feedback submission  
-  OS command injections
+    OS command injections
 
 ##### No visible functionalities  
-  cookies
-  insecure deserialization
+    cookies
+    insecure deserialization
     
 
 
