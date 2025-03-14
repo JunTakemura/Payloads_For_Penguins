@@ -49,6 +49,7 @@ Manually crawl the website with burp on.
 ##### No visible functionalities  
     cookies
     insecure deserialization
+    cache poisoning
     
 
 
@@ -139,6 +140,13 @@ angular_VER.js
 
 #### Cache poisoning
 
+Indicators:
+A js script that is fetched from a URL like this:
+<script type="text/javascript" src="https://ID.web-security-academy.net/resources/js/tracking.js"></script>
+
+Find unkeyed headers using [Param Miner](https://portswigger.net/bappstore/17d2949a985c4b7ca092728dba871943) extension.
+
+[Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)
 
 
 #### Http request smuggling
