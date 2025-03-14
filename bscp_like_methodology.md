@@ -155,6 +155,7 @@ Find unkeyed headers using [Param Miner](https://portswigger.net/bappstore/17d29
 
 #### Bypass auth
 
+##### email domain
 Indicator: Registration form with a message that implies a specific email domain has access to the admin panel.  
 When the server incorrectly handles a long email, you can register an email like example-super-long@subdomain.com.attacker.com. If the attacker.com part gets cut off, your registered email will have the subdomain.com email domain on their end.
 
