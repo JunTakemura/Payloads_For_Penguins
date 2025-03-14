@@ -55,6 +55,8 @@ Manually crawl the website with burp on.
 
 #### Fuzz
 
+With burp pro you can right click a domain in the site map > Engagement tools > Disocover content, but it's not available in the community edition. However, you can use ffuf instead.
+
 URL fuzz:
 ```bash
 ffuf -u https://ID.web-security-academy.net/FUZZ -w /path/to/SecLists/Web-Content/common.txt -s -c
@@ -140,7 +142,7 @@ angular_VER.js
 
 #### Cache poisoning
 
-Indicators:
+Indicator:
 A js script that is fetched from a URL like this:
 <script type="text/javascript" src="https://ID.web-security-academy.net/resources/js/tracking.js"></script>
 
@@ -152,6 +154,11 @@ Find unkeyed headers using [Param Miner](https://portswigger.net/bappstore/17d29
 #### Http request smuggling
 
 #### Bypass auth
+
+Indicator: Registration form with a message that implies a specific email domain has access to the admin panel.  
+When the server incorrectly handles a long email, you can register an email like example-super-long@subdomain.com.attacker.com. If the attacker.com part gets cut off, your registered email will have the subdomain.com email domain on their end.
+
+[Lab: Inconsistent handling of exceptional input](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-inconsistent-handling-of-exceptional-input)
 
 #### Brute forcing
 
@@ -165,7 +172,7 @@ Find unkeyed headers using [Param Miner](https://portswigger.net/bappstore/17d29
 
 #### JWT
 
-#### Business logic
+#### Change password
 
 #### Broken access control
 
