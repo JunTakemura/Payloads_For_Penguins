@@ -9,6 +9,8 @@ For now I mainly focus on how to **identify** vulnerabilities rather than exploi
 
 #### List functionalities
 
+Manually crawl the website with burp on.
+
 ##### login form, authentication  
     OAuth
     Password reset
@@ -136,6 +138,8 @@ angular_VER.js
 ```
 
 #### Cache poisoning
+
+
 
 #### Http request smuggling
 
