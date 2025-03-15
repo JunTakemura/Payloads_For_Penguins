@@ -3,7 +3,7 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 
 ## Flow
 
-For now I mainly focus on how to **identify** vulnerabilities rather than exploit them.
+*Indicators* provide hints on how to **identify** vulnerabilities.
 
 ### Recon
 
@@ -166,6 +166,20 @@ When the server incorrectly handles a long email, you can register an email like
 ### Get admin
 
 #### CSRF
+
+##### Attach social media profile
+
+Indicator:
+The website has `attach a social media profile` feature and has implemented OAuth.  
+A GET request to `/auth` doesn't have `state` parameter.
+
+Copy your authorization code for `/auth-linking` before it's used by dropping the requet. Set the payload that contains the code at the exploit server:
+```html
+<img src="https://0a65004a03c8bdc08047122300410025.web-security-academy.net/oauth-linking?code=YOUR_AUTHORIZATION_CODE">
+```
+Deliver the payload to the victim and the victim's account will be attached to your account.
+
+[Lab: Forced OAuth profile linking](https://portswigger.net/web-security/oauth/lab-oauth-forced-oauth-profile-linking)
 
 #### SQLi
 
