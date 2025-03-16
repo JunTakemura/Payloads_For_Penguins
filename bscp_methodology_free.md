@@ -196,7 +196,7 @@ Working payload for this lab:
 Indicator:  
 In `/resources/js/searchResults.js`, a notable source `eval()` is used.
 
-Examine how the code handles your input and modify the payload.
+Use DOM Invader to quickly find out the sink. Examine how the code handles your input and modify the payload.
 
 [Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)
 
