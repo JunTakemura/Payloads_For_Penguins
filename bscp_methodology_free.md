@@ -1,7 +1,7 @@
 # Methodology for BSCP Web App Pentesting Without Pro
 For those who can't afford burp pro or cheapskates thogh you can't take an actual exam without pro. Note that this NOT a general pentesting methodology. For example in this workflow SQLi only appears in the stage 2 `get admin` but in reality it of course can be used for getting a normal user account.
 
-## Index
+---
 
 [URL Fuzzing](#FUZZ)  
 [XSS](#XSS)  
@@ -11,8 +11,15 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 [OS Command Injections](#OS-command-injections)  
 [Cache Poisoning](#Cache-poisoning)  
 [HTTP Host Header Attacks](#HTTP-Host-header-attacks)  
+[Authentication Bypass](#Authentication-Bypass)  
+[OAuth](#OAuth)  
+[Bruteforcing](#Brute-forcing)
 [CORS](#CORS)  
+[CSRF](#CSRF)  
+[SSRF](#SSRF)  
 [LFI](#LFI)  
+[JWT](#JWT)
+[Insecure Deserialization](#Insecure_Deserialization)
 [File Uploading](#File-uploading)  
 
 
@@ -261,7 +268,7 @@ x=1
 
 [Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)
 
-#### Bypass auth
+#### Authentication Bypass
 
 ##### email domain
 Indicator: Registration form with a message that implies a specific email domain has access to the admin panel. 
@@ -527,7 +534,7 @@ Putting `${{<%[%'"}}%\.` into `message` parameter shows an error indicating the 
 
 [Lab: Server-side template injection in an unknown language with a documented exploit](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-in-an-unknown-language-with-a-documented-exploit)
 
-#### Insecure deserialization
+#### Insecure Deserialization
 
 | Object Type     | Header (Hex) | Header (Base64) |
 |-----------------|--------------|-----------------|
