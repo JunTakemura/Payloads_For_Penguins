@@ -26,7 +26,7 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 [SSTI](#SSTI)  
 [Insecure Deserialization](#Insecure_Deserialization)  
 
-[Common Payloads](Common-Payloads-and-Commands)  
+[Common Payloads](#Common-Payloads-and-Commands)  
 [Tools](#Tools)
 
 
