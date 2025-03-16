@@ -28,7 +28,7 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 
 [Common Payloads](#Common-Payloads-and-Commands)  
 [Tools](#Tools)
-
+[Wordlists](#Wordlists)  
 
 ---
 
@@ -706,6 +706,15 @@ Writing files:
 sqlmap -u "http://www.example.com/?id=1" --file-write "shell.php" --file-dest "/var/www/html/shell.php"
 ```
 You could use `--os-shell` to open a shell.
+
+## Wordlists
+
+[SecLists](https://github.com/danielmiessler/SecLists)  
+[PortSwigger Auth-Lab-Passwords](https://portswigger.net/web-security/authentication/auth-lab-passwords)  
+[PortSwigger Auth-Lab-Usernames](https://portswigger.net/web-security/authentication/auth-lab-usernames)  
+[XSS Cheat Sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)  
+[SQLi Cheat Sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet)  
+
 
 ## References
 [PortSwigger Academy Labs](https://portswigger.net/web-security/all-labs)  
