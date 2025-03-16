@@ -18,8 +18,8 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 [CSRF](#CSRF)  
 [SSRF](#SSRF)  
 [LFI](#LFI)  
-[JWT](#JWT)
-[Insecure Deserialization](#Insecure_Deserialization)
+[JWT](#JWT)  
+[Insecure Deserialization](#Insecure_Deserialization)  
 [File Uploading](#File-uploading)  
 
 [Common Payloads](Common-Payloads-and-Commands)  
