@@ -3,6 +3,11 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 
 ## Index
 
+[URL Fuzzing](#FUZZ)
+[XSS](#XSS)
+[Cache Poisoning](#Cache poisoning)
+
+
 ---
 
 ## Flow
@@ -119,7 +124,7 @@ addEventListener()
 
 ### Access any user account
 
-#### git
+#### Version Control
 
 Could be found with [fuzzing](#Fuzz)
 
