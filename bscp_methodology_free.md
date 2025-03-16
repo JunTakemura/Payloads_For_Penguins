@@ -194,14 +194,13 @@ Working payload for this lab:
 ##### Reflected DOM
 
 Indicator:  
-In `/resources/js/searchResults.js`, `eval()` is used.
+In `/resources/js/searchResults.js`, a notable source `eval()` is used.
 
-Working payload:
-```js
-\"-alert(1)}//
-```
+Examine how the code handles your input and modify the payload.
 
 [Lab: Reflected DOM XSS](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-dom-xss-reflected)
+
+Check [my writeup](https://juntakemura.dev/portswigger-reflected-dom-xss/) for this lab.
 
 ##### Angular JS
 
