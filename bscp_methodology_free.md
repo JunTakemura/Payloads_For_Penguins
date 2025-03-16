@@ -22,6 +22,8 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 [Insecure Deserialization](#Insecure_Deserialization)
 [File Uploading](#File-uploading)  
 
+[Common Payloads](Common-Payloads-and-Commands)  
+[Tools](#Tools)
 
 
 ---
@@ -579,9 +581,9 @@ Determine the number of columns of the target:
 
 or
 
----sql
+```sql
 1 UNION SELECT NULL,NULL-- -
----
+```
 
 List databases:
 ```sql
