@@ -90,7 +90,7 @@ With burp pro you can right click a domain in the site map > Engagement tools > 
 
 URL fuzz:
 ```bash
-ffuf -u https://ID.web-security-academy.net/FUZZ -w /path/to/SecLists/Web-Content/common.txt -s -c
+ffuf -u https://ID.web-security-academy.net/FUZZ -w /path/to/SecLists/Discovery/Web-Content/common.txt -s -c
 ```
 
 To find [SecLists](https://github.com/danielmiessler/SecLists) in your system:
