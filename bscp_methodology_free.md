@@ -62,7 +62,7 @@ Manually crawl the website with burp on.
     XXE
   
 ##### live chat  
-    websocket
+    Websocket XSS
 
 ##### category filter  
     SQLi
