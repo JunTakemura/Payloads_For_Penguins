@@ -3,9 +3,18 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 
 ## Index
 
-[URL Fuzzing](#FUZZ)
-[XSS](#XSS)
-[Cache Poisoning](#Cache poisoning)
+[URL Fuzzing](#FUZZ)  
+[XSS](#XSS)  
+[SQLi](#SQLi)  
+[XXE](#XXE)  
+[SSTI](#SSTI)  
+[OS Command Injections](#OS-command-injections)  
+[Cache Poisoning](#Cache-poisoning)  
+[HTTP Host Header Attacks](#HTTP-Host-header-attacks)  
+[CORS](#CORS)  
+[LFI](#LFI)  
+[File Uploading](#File-uploading)  
+
 
 
 ---
