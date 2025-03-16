@@ -301,6 +301,14 @@ Use Pitchfork attack in Intruder.
 
 [Lab: Broken brute-force protection, IP block](https://portswigger.net/web-security/authentication/password-based/lab-broken-bruteforce-protection-ip-block)
 
+#### GraphQL
+
+##### Private GraphQL Posts
+
+When GraphQL is used in a request, Burp automatically detects it. Right click the request > GraphQL > Set introspection query. Send the request. The GraphQL tab appears next to the Hex tab and you can modify the query and variables. Add the `postPassword` field found in a response to the introspection and the response returns the password.
+
+[Lab: Accessing private GraphQL posts](https://portswigger.net/web-security/graphql/lab-graphql-reading-private-posts)
+
 ---
 
 ### Get admin
