@@ -29,6 +29,7 @@ For those who can't afford burp pro or cheapskates thogh you can't take an actua
 [Common Payloads](#Common-Payloads-and-Commands)  
 [Tools](#Tools)  
 [Wordlists](#Wordlists)  
+[References](#References)  
 
 ---
 
