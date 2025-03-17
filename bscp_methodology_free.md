@@ -81,7 +81,9 @@ Manually crawl the website with burp on.
 ##### No visible functionalities  
     cookies
     insecure deserialization
-    cache poisoning
+    cache poisoning  
+    JWT  
+    SSRF with Referer, X-Forwarded-Host, etc.  
     
 
 
